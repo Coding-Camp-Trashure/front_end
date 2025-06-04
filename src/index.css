@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply p-0 m-0 box-border;
+  }
+
+  body {
+    font-family: "Raleway", sans-serif;
+  }
+
+  .font-inter {
+    font-family: "Inter", sans-serif !important;
+  }
+
+  h1,
+  h2,
+  p,
+  span {
+    @apply text-green-1;
+  }
+}
