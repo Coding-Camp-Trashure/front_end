@@ -1,5 +1,6 @@
 import React from "react";
 import { FOOTER_LINKS } from "../../utils/data";
+import logo from "../../assets/logo_dark.svg";
 
 const FooterSection = ({ title, links }) => (
   <div className="flex flex-col gap-y-5">
@@ -24,7 +25,7 @@ export default function Footer() {
       <div className="container mx-auto py-10 md:py-24 px-14">
         <div className="flex items-start justify-between flex-col lg:flex-row gap-10 lg:gap-0">
           <div className="flex flex-col gap-y-3 md:gap-y-5">
-            <img src="" alt="Trashure Logo" className="w-44" />
+            <img src={logo} alt="Trashure Logo" className="w-44" />
             <p className="font-medium leading-7 text-gray-700">
               Empowering communities with smart waste management solutions.
             </p>

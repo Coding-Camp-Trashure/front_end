@@ -59,18 +59,22 @@ export default function Map() {
   }, [userLocation]);
 
   return (
-    <section className="py-10 sm:py-14 md:py-20 lg:py-24" id="map">
-      <div className="container mx-auto px-10 sm:px-8 md:px-14 lg:px-14">
-        <div className="text-center gap-y-4 flex flex-col mb-16">
+    <section className="bg-white" id="map">
+      <div className="container mx-auto pb-8 md:pb-14 pt-20">
+        {/* Header Section - Centered */}
+        <div className="max-w-3xl mx-auto text-center mb-16 px-4">
           <h1 className="font-extrabold text-3xl sm:text-4xl md:text-5xl lg:leading-[4rem]">
             Lokasi Trashure
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mt-4">
             Temukan bagaimana Trashure telah meningkatkan partisipasi warga dalam
             memilah sampah di berbagai lokasi.
           </p>
         </div>
-        <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-10 md:gap-14 lg:gap-20 lg:pb-10">
+
+        {/* Content Section */}
+        <div className="flex flex-col lg:flex-row items-center justify-between lg:px-24 py-12 md:py-16 gap-8">
+          {/* Left Content */}
           <div className="flex flex-col items-start w-full lg:w-1/2 gap-10 md:gap-10">
             <div className="flex flex-col gap-y-3 text-left md:text-center lg:text-left w-full">
               <h2 className="font-semibold text-base sm:text-lg md:text-xl lg:text-2xl leading-snug md:leading-normal text-gray-800">
@@ -99,10 +103,11 @@ export default function Map() {
               Pelajari Cara Kerja
             </Button>
           </div>
+          {/* Right Content - Map */}
           <div className="flex items-center justify-center w-full lg:w-1/2 mb-8 lg:mb-0">
             <div
               ref={mapContainer}
-              className="w-full h-72 sm:h-96 md:h-[28rem] lg:h-[32rem] rounded-xl shadow-md bg-gray-200"
+              className="w-[625px] h-72 sm:h-96 md:h-[28rem] lg:h-[32rem] rounded-xl shadow-md bg-gray-200"
               style={{ minHeight: 250 }}
             />
           </div>

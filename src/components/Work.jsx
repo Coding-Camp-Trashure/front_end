@@ -51,11 +51,19 @@ const Work = () => {
 
                 {/* Image */}
                 <div className="flex-1 w-full px-4 sm:px-6 md:px-8">
-                  <div className="w-full h-56 md:h-72 lg:h-80 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <span className="text-gray-400 text-base md:text-lg">
-                      Image
-                    </span>
-                  </div>
+                  {step.img ? (
+                    <img
+                      src={step.img}
+                      alt={step.title}
+                      className="w-full h-56 md:h-72 lg:h-80 object-contain rounded-lg"
+                    />
+                  ) : (
+                    <div className="w-full h-56 md:h-72 lg:h-80 bg-gray-200 rounded-lg flex items-center justify-center">
+                      <span className="text-gray-400 text-base md:text-lg">
+                        Image
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

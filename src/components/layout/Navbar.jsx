@@ -5,6 +5,7 @@ import Button from "../Button";
 import NavLinks from "../NavLinks";
 import UserDropdown from "./navbar/UserDropdown";
 import HamburgerButton from "./navbar/HamburgerButton";
+import logo from "../../assets/logo.svg";
 
 export default function Navbar({ variant = "default", isAuthenticated = false, username = "" }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -138,7 +139,7 @@ export default function Navbar({ variant = "default", isAuthenticated = false, u
       <div className="relative bg-green-1 py-5 md:px-8 px-6 container mx-auto rounded-full flex items-center justify-between lg:divide-x-2 divide-green-3">
         {/* Logo */}
         <a href="#" className="mr-8">
-          <img src="" alt="Trashure Logo" className="w-36 md:w-40" />
+          <img src={logo} alt="Trashure Logo" />
         </a>
 
         {/* Desktop Navigation */}
