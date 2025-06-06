@@ -8,7 +8,9 @@ const Settings = () => {
   return (
     <>
       <Navbar variant="white" />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
       <Footer />
     </>
   );

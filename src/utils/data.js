@@ -52,16 +52,16 @@ export const MAIN_ROUTES = {
 
 export const FOOTER_LINKS = {
   companies: [
-    { id: 1, name: "Privacy Policy", href: "/privacy" },
-    { id: 2, name: "Help Center", href: "/help" },
-    { id: 3, name: "Terms Conditions", href: "/terms" },
-    { id: 4, name: "About Us", href: "/about" },
+    { id: 1, name: "Privacy Policy", href: "" },
+    { id: 2, name: "Help Center", href: "" },
+    { id: 3, name: "Terms Conditions", href: "" },
+    { id: 4, name: "About Us", href: "" },
   ],
   developers: [
-    { id: 1, name: "API Documentations", href: "/docs" },
-    { id: 2, name: "Product Knowledges", href: "/knowledge" },
-    { id: 3, name: "Ticketing Support", href: "/support" },
-    { id: 4, name: "Pricing", href: "/pricing" },
+    { id: 1, name: "API Documentations", href: "" },
+    { id: 2, name: "Product Knowledges", href: "" },
+    { id: 3, name: "Ticketing Support", href: "" },
+    { id: 4, name: "Pricing", href: "" },
   ],
 };
 

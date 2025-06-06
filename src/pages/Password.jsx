@@ -1,7 +1,7 @@
 import React from "react";
 import SettingsPassword from "../components/SettingsPassword";
 
-const Profile = () => {
+const Password = () => {
   return (
     <>
       <SettingsPassword />
@@ -9,4 +9,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Password;

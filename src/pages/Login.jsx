@@ -7,7 +7,9 @@ const Login = () => {
   return (
     <>
       <Navbar />
-      <LoginForm />
+      <main>
+        <LoginForm />
+      </main>
       <Footer />
     </>
   );

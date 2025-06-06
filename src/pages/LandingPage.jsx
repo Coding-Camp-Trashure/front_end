@@ -11,13 +11,15 @@ import ScrollToTopButton from "../components/ScrollToTopButton";
 const LandingPage = () => (
   <>
     <Navbar />
-    <Hero />
-    <Stats />
-    <Services />
-    <ServiceFeatured />
-    <Map />
+    <main>
+      <Hero />
+      <Stats />
+      <Services />
+      <ServiceFeatured />
+      <Map />
+      <ScrollToTopButton />
+    </main>
     <Footer />
-    <ScrollToTopButton />
   </>
 );
 
