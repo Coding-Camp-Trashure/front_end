@@ -20,7 +20,7 @@ export const PointsCard = ({ points, onTransfer }) => (
 
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <p className="text-lg font-semibold text-gray-600">Total Points Tersedia</p>
+          <p className="text-lg font-semibold text-gray-600">Total Saldo Tersedia</p>
           <h3 className="text-4xl font-bold text-gray-900">{points}</h3>
         </div>
         <div className="h-px bg-gray-100 my-2" />

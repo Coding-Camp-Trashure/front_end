@@ -1,10 +1,8 @@
-import deteksiOtomatis from "../assets/deteksi_otomatis.jpg";
-import deteksi from "../assets/deteksi.svg";
-import klasifikasiSampah from "../assets/klasifikasi_sampah.png";
+import sampah from "../assets/sampah.png";
 import klasifikasi from "../assets/klasifikasi.png";
 import information from "../assets/information.svg";
 import reward from "../assets/reward.png";
-import recycle from "../assets/recycle.png";
+import saldo from "../assets/saldo.png";
 
 export const DATA_NAVBARS = [
   { 
@@ -73,33 +71,33 @@ export const FEATURE_LIST = [
 
 export const STEPS = [
   {
-    title: "Deteksi Otomatis",
-    desc: "Sistem akan secara otomatis mendeteksi keberadaan objek sampah menggunakan kamera perangkat Anda.",
-    img: deteksi,
+    title: "Masukkan Sampah ke Mesin",
+    desc: "Sampah botol plastik, botol kaca, atau kaleng minuman dimasukkan ke dalam Reverse Vending Machine (RVM) yang tersedia di lokasi-lokasi mitra Trashure.",
+    img: sampah,
     left: false,
   },
   {
-    title: "Klasifikasi Sampah",
-    desc: "Aplikasi akan mengidentifikasi dan mengklasifikasikan jenis sampah berdasarkan kategori seperti organik, anorganik, atau B3.",
+    title: "Deteksi dan Klasifikasi Otomatis",
+    desc: "Mesin akan otomatis mendeteksi jenis sampah menggunakan kamera dan sistem deteksi berbasis AI, lalu mengklasifikasikannya ke dalam kategori botol plastik, botol kaca, atau kaleng.",
     img: klasifikasi,
     left: true,
   },
   {
-    title: "Akurasi dan Informasi",
-    desc: "Pengguna akan mendapatkan informasi tentang akurasi klasifikasi serta edukasi singkat terkait dampak dan cara penanganan jenis sampah tersebut.",
+    title: "Pengolahan Data dan Sinkronisasi ",
+    desc: "Setiap kali Anda memasukkan sampah, data transaksi akan dikirim dan dicatat pada akun Anda di website Trashure secara real-time.",
     img: information,
     left: false,
   },
   {
-    title: "Rekomendasi Penanganan",
-    desc: "Trashure memberikan saran penanganan yang tepat untuk setiap jenis sampah berdasarkan klasifikasi yang telah dilakukan.",
-    img: recycle,
+    title: "Dapatkan Uang Reward",
+    desc: "Setelah terverifikasi, Anda akan langsung menerima reward berupa uang digital yang dapat dilihat di dashboard akun Trashure Anda.",
+    img: reward,
     left: true,
   },
   {
-    title: "Dapatkan Poin Reward",
-    desc: "Setelah menyelesaikan proses klasifikasi dan penanganan sampah, Anda akan mendapatkan poin reward yang dapat ditukarkan dengan berbagai hadiah menarik.",
-    img: reward,
+    title: "Gunakan untuk Transaksi Digital",
+    desc: "Reward yang Anda peroleh dapat digunakan untuk beragam transaksi digital, seperti pembelian pulsa, voucher, atau ditransfer ke dompet digital.",
+    img: saldo,
     left: false,
   }
 ];

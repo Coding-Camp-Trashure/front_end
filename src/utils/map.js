@@ -97,11 +97,22 @@ export default class Map {
       }
     );
 
-    // Overlay: vm
+    // Overlay: Vending Machine Locations
     const vm = layerGroup([
-      marker([-6.9008, 107.6155]).bindPopup("Taman Lansia"),
-      marker([-6.9191, 107.6098]).bindPopup("Taman Vanda"),
-      marker([-6.9119, 107.6246]).bindPopup("Taman Super Hero"),
+      // Jakarta Locations
+      marker([-6.195833, 106.830833]).bindPopup("Taman Menteng - Central Jakarta"),
+      marker([-6.187222, 106.831667]).bindPopup("Taman Suropati - Menteng"),
+      marker([-6.170556, 106.823611]).bindPopup("Taman Monas - Central Jakarta"),
+
+      // Bandung Locations
+      marker([-6.900833, 107.615556]).bindPopup("Taman Lansia - Citarum"),
+      marker([-6.919167, 107.609722]).bindPopup("Taman Vanda - Merdeka"),
+      marker([-6.914722, 107.609167]).bindPopup("Alun-alun Bandung - City Square"),
+
+      // Surabaya Locations
+      marker([-7.293722, 112.737833]).bindPopup("Taman Bungkul - Darmo"),
+      marker([-7.265556, 112.752611]).bindPopup("Taman Prestasi - Genteng"),
+      marker([-7.262778, 112.748333]).bindPopup("Taman Surya - City Hall")
     ]);
 
     // Layer control
