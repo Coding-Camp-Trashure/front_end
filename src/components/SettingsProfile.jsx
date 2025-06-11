@@ -1,19 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiInfo, FiTrash2 } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
 import Button from "./Button";
 import SettingsLinks from "./SettingsLinks";
+import { useAuth } from "../context/AuthContext";
 
 const SettingsProfile = () => {
   const location = useLocation();
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
-    username: "John Doe",
-    email: "email@mail.com"
+    username: "",
+    email: ""
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        username: user.name || "",
+        email: user.email || ""
+      });
+    }
+  }, [user]);
+
+  const InfoTooltip = ({ message }) => (
+    <div className="group relative">
+      <FiInfo className="w-4 h-4 lg:w-5 lg:h-5 text-gray-400 cursor-help" />
+      <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-48 bg-gray-800 text-white text-xs rounded p-2 z-50">
+        {message}
+        <div className="absolute left-4 bottom-[-6px] w-2 h-2 bg-gray-800 transform rotate-45"></div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen mt-5">
@@ -56,13 +73,14 @@ const SettingsProfile = () => {
                     <label className="text-sm font-medium text-gray-700">
                       Username
                     </label>
-                    <FiInfo className="w-4 h-4 lg:w-5 lg:h-5 text-gray-400" />
+                    <InfoTooltip message="Username tidak dapat diubah karena terhubung dengan data registrasi" />
                   </div>
-                  <div className="w-full h-[40px] lg:h-[46px] bg-white rounded-lg border border-gray-300 hover:border-green-1 focus-within:border-green-1 focus-within:ring-1 focus-within:ring-green-1 transition-colors">
+                  <div className="w-full h-[40px] lg:h-[46px] bg-gray-50 rounded-lg border border-gray-300 cursor-not-allowed">
                     <input
                       type="text"
+                      name="username"
                       value={formData.username}
-                      className="w-full h-full px-3 lg:px-4 bg-transparent disabled:text-gray-500 text-sm lg:text-base"
+                      className="w-full h-full px-3 lg:px-4 bg-transparent disabled:text-gray-500 text-sm lg:text-base cursor-not-allowed"
                       disabled
                     />
                   </div>
@@ -74,35 +92,30 @@ const SettingsProfile = () => {
                     <label className="text-sm font-medium text-gray-700">
                       Email
                     </label>
-                    <FiInfo className="w-4 h-4 lg:w-5 lg:h-5 text-gray-400" />
+                    <InfoTooltip message="Email tidak dapat diubah karena digunakan untuk autentikasi" />
                   </div>
-                  <div className="w-full h-[40px] lg:h-[46px] bg-white rounded-lg border border-gray-300 hover:border-green-1 focus-within:border-green-1 focus-within:ring-1 focus-within:ring-green-1 transition-colors">
+                  <div className="w-full h-[40px] lg:h-[46px] bg-gray-50 rounded-lg border border-gray-300 cursor-not-allowed">
                     <input
                       type="email"
+                      name="email"
                       value={formData.email}
-                      onChange={handleChange}
-                      className="w-full h-full px-3 lg:px-4 bg-transparent text-sm lg:text-base"
-                      placeholder="email@mail.com"
+                      className="w-full h-full px-3 lg:px-4 bg-transparent disabled:text-gray-500 text-sm lg:text-base cursor-not-allowed"
+                      disabled
                     />
                   </div>
                 </div>
 
-                {/* Action Buttons */}
+                {/* Remove action buttons since fields are read-only */}
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 lg:mt-8 pt-4 lg:pt-6 border-t border-gray-200">
-                  <Button
-                    variant="secondary"
-                    size="md"
-                    className="w-full sm:w-auto"
-                  >
-                    Simpan Perubahan
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    size="md"
-                    className="w-full sm:w-auto"
-                  >
-                    Batal
-                  </Button>
+                  <Link to="/" className="w-full sm:w-auto">
+                    <Button
+                      variant="secondary"
+                      size="md"
+                      className="w-full"
+                    >
+                      Kembali
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

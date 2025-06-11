@@ -1,34 +1,75 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import Input from "./Input";
 import Button from "./Button";
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
+  const { register } = useAuth();
   const [form, setForm] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setError("");
+    setErrors({});
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.username || !form.email || !form.password || !form.confirmPassword) {
-      setError("Semua field wajib diisi.");
-      return;
+    setErrors({});
+    setIsSubmitting(true);
+    
+    try {
+      // Validation
+      if (!form.name || !form.email || !form.password || !form.confirmPassword) {
+        setErrors({ submit: "Semua field harus diisi" });
+        return;
+      }
+
+      if (form.password !== form.confirmPassword) {
+        setErrors({ submit: "Password dan konfirmasi password tidak cocok" });
+        return;
+      }
+
+      const response = await register({
+        name: form.name,
+        email: form.email,
+        password: form.password
+      });
+
+      // Check for token in response
+      if (response?.token) {
+        // Force logout after registration
+        localStorage.removeItem('token');
+        localStorage.removeItem('trashure_user');
+        
+        // Navigate to login with success message
+        navigate('/login', { 
+          replace: true,
+          state: { message: "Registrasi berhasil! Silakan login dengan akun baru Anda." } 
+        });
+      }
+    } catch (error) {
+      console.error('Registration error:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status
+      });
+      
+      setErrors({ 
+        submit: error.response?.data?.message || 
+                "Registrasi gagal. Silakan coba lagi." 
+      });
+    } finally {
+      setIsSubmitting(false);
     }
-    if (form.password !== form.confirmPassword) {
-      setError("Konfirmasi password tidak cocok.");
-      return;
-    }
-    // TODO: Add your registration logic here
-    alert("Registrasi berhasil (dummy)!");
   };
 
   return (
@@ -37,15 +78,18 @@ const RegisterForm = () => {
         <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center">
           Daftar Akun Trashure
         </h2>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-4">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-3 sm:gap-4"
+        >
           <Input
             label="Username"
-            name="username"
+            name="name" // Changed from username to name
             type="text"
-            value={form.username}
+            value={form.name}
             onChange={handleChange}
             placeholder="Masukkan username"
-            autoComplete="username"
+            autoComplete="name"
             required
           />
           <Input
@@ -78,16 +122,17 @@ const RegisterForm = () => {
             autoComplete="new-password"
             required
           />
-          {error && (
-            <div className="text-red-500 text-xs sm:text-sm mt-1">{error}</div>
+          {errors.submit && (
+            <div className="text-red-500 text-xs sm:text-sm mt-1">{errors.submit}</div>
           )}
           <Button
             type="submit"
             variant="secondary"
             size="md"
             className="w-full text-sm sm:text-base mt-2"
+            disabled={isSubmitting}
           >
-            Daftar
+            {isSubmitting ? "Mendaftar..." : "Daftar"}
           </Button>
         </form>
         <div className="mt-4 text-center text-xs sm:text-sm text-gray-500">

@@ -1,49 +1,47 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import Input from "./Input";
 import Button from "./Button";
 
 const LoginForm = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [form, setForm] = useState({ 
+    email: "", 
+    password: "",
+    rememberMe: false 
+  });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const validateForm = () => {
-    const newErrors = {};
-    
-    // Email validation
-    if (!form.email) {
-      newErrors.email = "Email wajib diisi";
-    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
-      newErrors.email = "Format email tidak valid";
-    }
-    
-    // Password validation
-    if (!form.password) {
-      newErrors.password = "Password wajib diisi";
-    } else if (form.password.length < 6) {
-      newErrors.password = "Password minimal 6 karakter";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({});
     setIsSubmitting(true);
     
-    if (validateForm()) {
-      try {
-        // TODO: Add your login logic here
-        // await loginUser(form);
-        alert("Login berhasil!");
-      } catch (error) {
-        setErrors({ submit: "Gagal masuk. Silakan coba lagi." });
+    try {
+      if (!form.email || !form.password) {
+        setErrors({ submit: "Email dan password harus diisi" });
+        return;
       }
+
+      const response = await login({
+        email: form.email,
+        password: form.password
+      });
+
+      if (response?.token) {
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setErrors({ 
+        submit: error.response?.data?.message || "Login gagal. Silakan coba lagi." 
+      });
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    setIsSubmitting(false);
   };
 
   return (

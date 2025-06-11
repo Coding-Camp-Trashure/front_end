@@ -13,13 +13,31 @@ const Demo = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const cameraSelectRef = useRef(null);
+  const [toastMessage, setToastMessage] = useState("");
   const [showNotification, setShowNotification] = useState(false);
   const { isCameraActive, initializeCamera } = useCamera(videoRef, canvasRef, cameraSelectRef);
 
-  const handleDetection = (detectionResult) => {
-    if (detectionResult.success) {
+  const handleDetection = (result) => {
+    if (result.success) {
+      if (result.jenis_sampah === "other") {
+        setToastMessage("Bukan sampah yang dapat didaur ulang. Silakan coba dengan sampah yang sesuai.");
+      } else {
+        // Format the money amount for valid trash
+        const moneyEarned = new Intl.NumberFormat('id-ID', {
+          style: 'currency',
+          currency: 'IDR'
+        }).format(result.uang_didapat || 0);
+
+        setToastMessage(`${result.jenis_sampah} terdeteksi! Anda mendapatkan ${moneyEarned}`);
+      }
       setShowNotification(true);
-      // Auto-hide notification after 5 seconds
+      console.log('Detection result:', result);
+      
+      setTimeout(() => setShowNotification(false), 5000);
+    } else {
+      console.error('Detection failed:', result.error);
+      setToastMessage("Gagal mendeteksi sampah. Silakan coba lagi.");
+      setShowNotification(true);
       setTimeout(() => setShowNotification(false), 5000);
     }
   };
@@ -39,7 +57,7 @@ const Demo = () => {
         <DemoInfo />
         <ScrollToTopButton />
         <Toast 
-          message="Garbage successfully detected!"
+          message={toastMessage}
           isVisible={showNotification}
           onClose={() => setShowNotification(false)}
         />

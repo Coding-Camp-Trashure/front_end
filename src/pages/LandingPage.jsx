@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/layout/Navbar";
+import NavbarLogin from "../components/NavbarLogin";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
 import Services from "../components/Services";
