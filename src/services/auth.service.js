@@ -25,35 +25,15 @@ export const authService = {
       }
       throw new Error('No token received from server');
     } catch (error) {
-      console.error('Login error:', {
-        message: error.message,
-        status: error.response?.status,
-        data: error.response?.data
-      });
       throw error;
     }
   },
 
   register: async (userData) => {
     try {
-      console.log('Registration payload:', userData);
       const response = await api.post('/auth/register', userData);
-      
-      // Log successful response
-      console.log('Registration response:', response.data);
       return response.data;
     } catch (error) {
-      // Enhanced error logging
-      console.error('Registration error details:', {
-        message: error.message,
-        status: error.response?.status,
-        data: error.response?.data,
-        config: {
-          url: error.config?.url,
-          method: error.config?.method,
-          data: error.config?.data
-        }
-      });
       throw error;
     }
   },
@@ -61,10 +41,8 @@ export const authService = {
   getCurrentUser: () => {
     try {
       const userStr = localStorage.getItem(STORAGE_KEY.USER);
-      console.log('Getting user from storage:', userStr);
       return userStr ? JSON.parse(userStr) : null;
     } catch (error) {
-      console.error('Error getting user data:', error);
       return null;
     }
   },

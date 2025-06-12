@@ -72,13 +72,6 @@ export const AuthProvider = ({ children }) => {
       const response = await authService.register(userData);
       return response;
     } catch (error) {
-      console.error('Registration context error:', {
-        message: error.message,
-        status: error.response?.status,
-        data: error.response?.data
-      });
-      
-      // Rethrow with more specific error message
       throw {
         message: error.response?.data?.message || 'Registration failed',
         status: error.response?.status,

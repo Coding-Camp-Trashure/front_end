@@ -22,7 +22,6 @@ const Demo = () => {
       if (result.jenis_sampah === "other") {
         setToastMessage("Bukan sampah yang dapat didaur ulang. Silakan coba dengan sampah yang sesuai.");
       } else {
-        // Format the money amount for valid trash
         const moneyEarned = new Intl.NumberFormat('id-ID', {
           style: 'currency',
           currency: 'IDR'
@@ -31,11 +30,8 @@ const Demo = () => {
         setToastMessage(`${result.jenis_sampah} terdeteksi! Anda mendapatkan ${moneyEarned}`);
       }
       setShowNotification(true);
-      console.log('Detection result:', result);
-      
       setTimeout(() => setShowNotification(false), 5000);
     } else {
-      console.error('Detection failed:', result.error);
       setToastMessage("Gagal mendeteksi sampah. Silakan coba lagi.");
       setShowNotification(true);
       setTimeout(() => setShowNotification(false), 5000);
