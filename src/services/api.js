@@ -2,11 +2,12 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: import.meta.env.PROD 
-    ? 'https://backend-trashure-production.up.railway.app'
+    ? 'https://trashurebackend-production.up.railway.app'
     : '/api',
   headers: {
     'Content-Type': 'application/json'
-  }
+  },
+  withCredentials: true
 });
 
 // Add response interceptor for error handling
