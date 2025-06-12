@@ -21,19 +21,24 @@ const LoginForm = () => {
     setIsSubmitting(true);
     
     try {
-      await login({
+      if (!form.email || !form.password) {
+        setErrors({ submit: "Email dan password harus diisi" });
+        return;
+      }
+
+      const response = await login({
         email: form.email,
         password: form.password
       });
-      
-      navigate('/dashboard');
+
+      if (response?.token) {
+        navigate('/dashboard');
+      }
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 
-                          error.response?.status === 500 ? 
-                          'Server error. Please try again later.' : 
-                          'Login failed. Please check your credentials.';
-      
-      setErrors({ submit: errorMessage });
+      console.error('Login error:', error);
+      setErrors({ 
+        submit: error.response?.data?.message || "Login gagal. Silakan coba lagi." 
+      });
     } finally {
       setIsSubmitting(false);
     }
