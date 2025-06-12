@@ -70,33 +70,20 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       const response = await authService.register(userData);
-      
-      // The response is already the data we need
-      const data = response;
-
-      // Store token
-      if (data?.token) {
-        localStorage.setItem('token', data.token);
-        api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
-
-        // Create user object and store it
-        const userInfo = {
-          name: data.name,
-          email: data.email
-        };
-        localStorage.setItem('trashure_user', JSON.stringify(userInfo));
-
-        // Update auth state
-        setUser(userInfo);
-        setIsAuthenticated(true);
-
-        return data;
-      }
-      
-      throw new Error('No token received from server');
+      return response;
     } catch (error) {
-      console.error('Registration error:', error);
-      throw error;
+      console.error('Registration context error:', {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data
+      });
+      
+      // Rethrow with more specific error message
+      throw {
+        message: error.response?.data?.message || 'Registration failed',
+        status: error.response?.status,
+        data: error.response?.data
+      };
     }
   };
 

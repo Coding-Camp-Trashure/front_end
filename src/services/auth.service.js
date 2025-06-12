@@ -36,26 +36,24 @@ export const authService = {
 
   register: async (userData) => {
     try {
+      console.log('Registration payload:', userData);
       const response = await api.post('/auth/register', userData);
-      const data = response.data;
       
-      if (data?.token) {
-        // Store token
-        localStorage.setItem(STORAGE_KEY.TOKEN, data.token);
-        api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
-        
-        // Store user info from registration response
-        const userInfo = {
-          name: data.name,
-          email: data.email
-        };
-        localStorage.setItem(STORAGE_KEY.USER, JSON.stringify(userInfo));
-        
-        return data;
-      }
-      throw new Error('No token received from server');
+      // Log successful response
+      console.log('Registration response:', response.data);
+      return response.data;
     } catch (error) {
-      console.error('Registration error:', error);
+      // Enhanced error logging
+      console.error('Registration error details:', {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+        config: {
+          url: error.config?.url,
+          method: error.config?.method,
+          data: error.config?.data
+        }
+      });
       throw error;
     }
   },
