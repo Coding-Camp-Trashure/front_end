@@ -54,7 +54,6 @@ const Demo = () => {
           isCameraActive={isCameraActive}
           onDetection={handleDetection}
         />
-        <DemoInfo />
         <ScrollToTopButton />
         <Toast 
           message={toastMessage}

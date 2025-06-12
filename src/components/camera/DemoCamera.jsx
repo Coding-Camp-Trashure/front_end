@@ -57,7 +57,7 @@ const DemoCamera = ({ videoRef, canvasRef, cameraSelectRef, isCameraActive, onDe
   };
 
   return (
-    <section className="container mx-auto px-4 sm:px-8 md:px-14">
+    <section className="container mx-auto px-4 sm:px-8 md:px-14 pb-12 md:pb-16">
       <div className="relative w-full aspect-video max-w-5xl mx-auto bg-gray-200 rounded-xl overflow-hidden">
         <select 
           ref={cameraSelectRef}
