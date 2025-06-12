@@ -10,15 +10,17 @@ const api = axios.create({
   withCredentials: true
 });
 
-// Add response interceptor for error handling
+// Enhanced error handling
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 500) {
       console.error('Server Error Details:', {
-        status: error.response.status,
+        endpoint: error.config.url,
+        method: error.config.method,
         data: error.response.data,
-        headers: error.response.headers
+        status: error.response.status,
+        message: error.message
       });
     }
     return Promise.reject(error);

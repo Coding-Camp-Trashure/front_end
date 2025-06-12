@@ -12,13 +12,11 @@ export const authService = {
       const data = response.data;
       
       if (data?.token) {
-        // Store token
         localStorage.setItem(STORAGE_KEY.TOKEN, data.token);
         api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
         
-        // Store user info from credentials since we don't have a /me endpoint
         const userInfo = {
-          name: credentials.name || credentials.email.split('@')[0], // Use name or email username
+          name: data.name || credentials.email.split('@')[0],
           email: credentials.email
         };
         localStorage.setItem(STORAGE_KEY.USER, JSON.stringify(userInfo));
@@ -27,7 +25,11 @@ export const authService = {
       }
       throw new Error('No token received from server');
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('Login error:', {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data
+      });
       throw error;
     }
   },
