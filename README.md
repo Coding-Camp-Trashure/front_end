@@ -39,6 +39,7 @@ npm install
 3. Create environment file:
 ```bash
 # .env
+VITE_MAP_SERVICE_API_KEY=your_map_service_api_key_here
 VITE_API_URL=https://api.example.com
 ```
 
