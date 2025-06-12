@@ -1,4 +1,4 @@
-import bannerServicesFeatured from "../assets/illustration_data.png";
+import perubahan from "../assets/perubahan.png";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
@@ -25,7 +25,7 @@ const ServiceFeatured = () => (
         </div>
         <div className="flex items-center justify-center flex-1">
           <img
-            src={bannerServicesFeatured}
+            src={perubahan}
             alt="Data Illustration"
             draggable={false}
             className="w-full md:w-[28rem]"
