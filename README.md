@@ -1,5 +1,7 @@
 # Trashure Frontend
 
+---
+
 ## Overview
 Trashure adalah aplikasi web yang membantu pengguna mengelola bahan limbah secara cerdas dan mendapatkan imbalan untuk tindakan lingkungan.
 
