@@ -9,11 +9,10 @@ export default defineConfig(({ mode }) => {
     server: {
       proxy: {
         '/api': {
-          target: env.VITE_API_URL,
+          target: 'https://backend-trashure-production.up.railway.app',
           changeOrigin: true,
           secure: false,
-          rewrite: (path) => path.replace(/^\/api/, ''),
-          // cors: true
+          rewrite: (path) => path.replace(/^\/api/, '')
         }
       }
     }
